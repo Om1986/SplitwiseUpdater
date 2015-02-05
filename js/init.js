@@ -96,13 +96,16 @@ function readFile(self,callback) {
                         //console.log(words);
                         var item = words.slice(1,-1);
                         var price = words.pop().slice(1).replace(",",".");
-                        var discount = 0,
-                            discountLine = lines[i+1].trim().split(/\s+/);
-                        if(discountLine.indexOf("Discount") !=-1){
-//                             console.log(discountLine);
-                             discount = discountLine[1].slice(2,-1).replace(",",".");
-                          //console.log(discount);
-                        }
+                        var discount = 0;
+												if(lines[i+1]){
+														discountLine = lines[i+1].trim().split(/\s+/);
+														if(discountLine.indexOf("Discount") !=-1){
+		//                             console.log(discountLine);
+																discount = discountLine[1].slice(2,-1).replace(",",".");
+															//console.log(discount);
+														}
+												}
+
 
                         spObj.item = item.join(" ");
                         spObj.price = (price - discount).toFixed(2);
